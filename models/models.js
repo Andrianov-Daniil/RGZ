@@ -1,4 +1,3 @@
-const { emit } = require('nodemon');
 const sequelize = require('../db');
 const {DataTypes} = require('sequelize');
 
