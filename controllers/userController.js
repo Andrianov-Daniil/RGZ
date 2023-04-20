@@ -32,21 +32,35 @@ class UserController{
         const user = await User.create({email, role, password: hashPassword});
         const basket = await Basket.create({userId: user.id});
         const token = generateJwt(user.id, user.email, user.role);
-        return res.json(token);
+        return res.json({token});
     }
 
     //логин
-    async login (req, res){
-        
+    async login (req, res, next){
+        const {email, password} = req.body;
+        if(!password){
+            return next(ApiError.badRequest('Введите пароль!'));
+        }
+        if(!email){
+            return next(ApiError.badRequest('Введите email!'));
+        }
+        const user = await User.findOne({where: {email}});
+        if(!user){
+            return next(ApiError.badRequest('Пользователь с таким email не найден!'));
+        }
+
+        let comparePassword = bcrypt.compareSync(password, user.password);
+        if(!comparePassword){
+            return next(ApiError.badRequest('Неверный пароль!'));
+        }
+        const token = generateJwt(user.id, user.email, user.role);
+        return res.json({token});
     }
 
     //проверка
     async chek (req, res, next){
-        const {id} = req.query;
-        if (!id){
-            return next(ApiError.badRequest('Не введён id!'));
-        }
-        res.json(id);
+        const token =generateJwt(req.user.id, req.user.email, req.user.role);
+        res.json({token});
     }
 }
 
