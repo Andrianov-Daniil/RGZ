@@ -1,4 +1,9 @@
 .logo{
     color: white;
     text-decoration: none;
+    font-size: 200%;
+}
+
+.button{
+    margin-right: 30px;
 }
