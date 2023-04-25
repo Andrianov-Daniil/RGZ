@@ -7,3 +7,16 @@
 .button{
     margin-right: 30px;
 }
+
+.auth{
+    padding: 5% 5%;
+    width: 500px; /* Ширина поля в процентах */
+    height: 300px; /* Высота поля в пикселах */
+    resize: none; /* Запрещаем изменять размер */
+}
+
+.row_auth{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}

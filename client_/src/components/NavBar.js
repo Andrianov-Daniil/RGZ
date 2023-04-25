@@ -27,6 +27,6 @@ const NavBar = observer( () => {
             </Container>
         </Navbar>
     )
-})
+});
 
 export default NavBar;
