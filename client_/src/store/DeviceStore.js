@@ -5,6 +5,8 @@ export default class UserStore{
         this._types = [
             {id: 1, name: 'Холодильник'},
             {id: 2, name: 'Смартфон'},
+            {id: 3, name: 'Мультиварка'},
+            {id: 4, name: 'Ноутбуки'}
         ]
         this._brands = [
             {id: 1, name: 'Самсунг'},
@@ -15,6 +17,7 @@ export default class UserStore{
             {id: 2, name: '13 pro', price: 120000, rating: 5, img: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.alfaplan.ru%2F&psig=AOvVaw3GQBp2UrHChtXoaX6iZbQy&ust=1682323950574000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLiIiJ7Hv_4CFQAAAAAdAAAAABAE'},
             {id: 3, name: '14 pro', price: 1230000, rating: 5, img: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.alfaplan.ru%2F&psig=AOvVaw3GQBp2UrHChtXoaX6iZbQy&ust=1682323950574000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLiIiJ7Hv_4CFQAAAAAdAAAAABAE'},
         ]
+        this._selectedType = {};
         makeAutoObservable(this);
     }
 
@@ -27,6 +30,9 @@ export default class UserStore{
     setDevices(devices){
         this._devices = devices;
     }
+    setSelectedType(type){
+        this._selectedType = type;
+    }
 
     get types(){
         return this._types;
@@ -36,5 +42,8 @@ export default class UserStore{
     }
     get devices(){
         return this._devices;
+    }
+    get selectedType(){
+        return this._selectedType;
     }
 }
