@@ -11,6 +11,11 @@ export default class UserStore{
         this._brands = [
             {id: 1, name: 'Самсунг'},
             {id: 2, name: 'Айфон'},
+            {id: 3, name: 'Айфон'},
+            {id: 4, name: 'Айфон'},
+            {id: 5, name: 'Айфон'},
+            
+            
         ]
         this._devices = [
             {id: 1, name: '12 pro', price: 10000, rating: 5, img: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.alfaplan.ru%2F&psig=AOvVaw3GQBp2UrHChtXoaX6iZbQy&ust=1682323950574000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLiIiJ7Hv_4CFQAAAAAdAAAAABAE'},
@@ -18,6 +23,7 @@ export default class UserStore{
             {id: 3, name: '14 pro', price: 1230000, rating: 5, img: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.alfaplan.ru%2F&psig=AOvVaw3GQBp2UrHChtXoaX6iZbQy&ust=1682323950574000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLiIiJ7Hv_4CFQAAAAAdAAAAABAE'},
         ]
         this._selectedType = {};
+        this._selectedBrand = {};
         makeAutoObservable(this);
     }
 
@@ -33,6 +39,9 @@ export default class UserStore{
     setSelectedType(type){
         this._selectedType = type;
     }
+    setSelectedBrand(brand){
+        this._selectedBrand = brand;
+    }
 
     get types(){
         return this._types;
@@ -45,5 +54,8 @@ export default class UserStore{
     }
     get selectedType(){
         return this._selectedType;
+    }
+    get selectedBrand(){
+        return this._selectedBrand;
     }
 }
