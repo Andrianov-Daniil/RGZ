@@ -20,3 +20,16 @@
     justify-content: space-between;
     margin-bottom: 10px;
 }
+
+.device{
+    width: 150px;
+    height: 250px;
+    cursor: pointer;
+    border-color: brown;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.col{
+    padding: 20px;
+}
