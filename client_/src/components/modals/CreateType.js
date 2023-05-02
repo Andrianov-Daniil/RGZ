@@ -15,10 +15,13 @@ const CreateType = ({show, onHide}) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                <Form>
+                    <Form.Control placeholder='Введите название типа' />
+                </Form>
                 
             </Modal.Body>
             <Modal.Footer>
-                <Button variant='outline-dark' onClick={onHide}>Закрыть</Button>
+                <Button variant='outline-danger' onClick={onHide}>Закрыть</Button>
                 <Button variant='outline-success' onClick={onHide}>Добавить</Button>
             </Modal.Footer>
         </Modal>
