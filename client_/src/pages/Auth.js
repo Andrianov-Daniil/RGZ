@@ -7,11 +7,21 @@ import {NavLink} from "react-router-dom";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { observer } from 'mobx-react-lite';
+import { registation } from "../http/userAPI";
+import { useState } from "react";
 
 const Auth = observer( () => {
     const location = useLocation();
     const isLogin = location.pathname === LOGIN_ROUTE;
-    console.log(location);
+    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const signIn = async () => {
+        const response = await registation(email, password);
+        console.log(response);
+    }
+
     return(
         <Container 
             className="d-flex justify-content-center align-items-center"
@@ -23,11 +33,16 @@ const Auth = observer( () => {
                     <Form.Control
                         className="mt-3"
                         placeholder="Введите ваш email..."
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                     />
 
                     <Form.Control
                         className="mt-3"
                         placeholder="Введите ваш пароль..."
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        type='password'
                     />
 
                     {isLogin ?
@@ -35,7 +50,10 @@ const Auth = observer( () => {
                             <div>
                                 Нет аккаунта?<br/> <NavLink to={REGISTRATION_ROUTE}>Зарегестрируйтесь!</NavLink>
                             </div>
-                            <Button variant={"outline-success"}>
+                            <Button 
+                                variant={"outline-success"}
+                                onClick={signIn}
+                            >
                                 Войти
                             </Button>
                         </line>
@@ -44,7 +62,10 @@ const Auth = observer( () => {
                             <div className="mt-2">
                                 Есть аккаунт? <br/><NavLink to={LOGIN_ROUTE}>Войдите!</NavLink>
                             </div>
-                            <Button variant={"outline-success"}>
+                            <Button 
+                                variant={"outline-success"}
+                                onClick={signIn}
+                            >
                                 Зарегестрироваться
                             </Button>
                         </line>

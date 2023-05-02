@@ -1,10 +1,17 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { Form, Button, Dropdown } from 'react-bootstrap';
+import { Form, Button, Dropdown, Row, Col } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { Context } from '../..';
 
 const CreateDevice = ({show, onHide}) => {
     const {device} = useContext(Context);
+    const [info, setInfo] = useState([]);
+    const addInfo = () => {
+        setInfo([...info, {title: '', description: '', number: Date.now()}])
+    }
+    const removeInfo = (number) => {
+        setInfo(info.filter(i => i.number !== number))
+    }
     return(
         <Modal
             show={show}
@@ -42,6 +49,32 @@ const CreateDevice = ({show, onHide}) => {
                     <Form.Control className='mt-3' placeholder='Введите название устройства'/>
                     <Form.Control className='mt-3' placeholder='Введите стоимость устройства'/>
                     <Form.Control className='mt-3' type='file'/>
+                    <hr/>
+                    <Button
+                        variant='outline-dark'
+                        onClick={addInfo}
+                    >
+                        Добавить новое свойство
+                    </Button>
+                    {
+                        info.map( i => 
+                             <Row className='mt-3' key={i.number}>
+                                <Col md={4}>
+                                    <Form.Control placeholder='Введите название свойства' />
+                                </Col>
+                                <Col md={4}>
+                                    <Form.Control placeholder='Введите описание свойства' />
+                                </Col>
+                                <Col md={4}>
+                                    <Button
+                                        variant='outline-danger'
+                                        onClick={() => removeInfo(i.number)}
+                                    >
+                                        Удалить</Button>
+                                </Col>
+                             </Row>   
+                        )
+                    }
                 </Form>
             </Modal.Body>
             <Modal.Footer>
