@@ -1,25 +1,37 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import {Container, Form} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
+//import Row from "react-bootstrap/Row";
 import {NavLink} from "react-router-dom";
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "../utils/consts";
+import { useLocation, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { observer } from 'mobx-react-lite';
-import { registation } from "../http/userAPI";
-import { useState } from "react";
+import {login, registration} from "../http/userAPI";
+import { Context } from "..";
 
 const Auth = observer( () => {
+    const {user} = useContext(Context);
     const location = useLocation();
+    const history = useHistory();
     const isLogin = location.pathname === LOGIN_ROUTE;
-    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const signIn = async () => {
-        const response = await registation(email, password);
-        console.log(response);
+    const click = async () => {
+        try {
+            let data;
+            if (isLogin) {
+                data = await login(email, password);
+            } else {
+                data = await registration(email, password);
+            }
+            user.setUser(user);
+            user.setIsAuth(true);
+            history.push(SHOP_ROUTE);
+        } catch (e) {
+            alert(e.response.data.message)
+        }
     }
 
     return(
@@ -52,7 +64,7 @@ const Auth = observer( () => {
                             </div>
                             <Button 
                                 variant={"outline-success"}
-                                onClick={signIn}
+                                onClick={click}
                             >
                                 Войти
                             </Button>
@@ -64,7 +76,7 @@ const Auth = observer( () => {
                             </div>
                             <Button 
                                 variant={"outline-success"}
-                                onClick={signIn}
+                                onClick={click}
                             >
                                 Зарегестрироваться
                             </Button>

@@ -13,19 +13,19 @@ const generateJwt = (id, email, role) => {
 
 class UserController{
     //регистрация
-    async registration (req, res){
+    async registration (req, res, next){
         const {email, password, role} = req.body;
 
-        if(!password){
-            return next(ApiError.badRequest('Введите пароль!'));
-        }
         if(!email){
             return next(ApiError.badRequest('Введите email!'));
+        }
+        if(!password){
+            return next(ApiError.badRequest('Введите пароль!'));
         }
         
         const candidate = await User.findOne({where: {email}});
         if (candidate){
-            return ApiError.badRequest('Пользователь с таким email уже существует!');
+            return next(ApiError.badRequest('Пользователь с таким email уже существует!'));
         }
         
         const hashPassword = await bcrypt.hash(password, 5);
@@ -38,17 +38,16 @@ class UserController{
     //логин
     async login (req, res, next){
         const {email, password} = req.body;
-        if(!password){
-            return next(ApiError.badRequest('Введите пароль!'));
-        }
         if(!email){
             return next(ApiError.badRequest('Введите email!'));
+        }
+        if(!password){
+            return next(ApiError.badRequest('Введите пароль!'));
         }
         const user = await User.findOne({where: {email}});
         if(!user){
             return next(ApiError.badRequest('Пользователь с таким email не найден!'));
         }
-
         let comparePassword = bcrypt.compareSync(password, user.password);
         if(!comparePassword){
             return next(ApiError.badRequest('Неверный пароль!'));

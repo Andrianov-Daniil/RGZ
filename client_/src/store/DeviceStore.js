@@ -24,7 +24,7 @@ export default class UserStore{
             {id: 4, name: '14 pro', price: 1230000, rating: 5, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-NepTStjipxyh_gm9vhvJpdmvi4QxaxaTIx4S7jWR9A&s'},
             {id: 5, name: '14 pro', price: 1230000, rating: 5, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-NepTStjipxyh_gm9vhvJpdmvi4QxaxaTIx4S7jWR9A&s'},
             {id: 6, name: '15 pro', price: 110000, rating: 5, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-NepTStjipxyh_gm9vhvJpdmvi4QxaxaTIx4S7jWR9A&s'},
-            {id: 6, name: '15 pro', price: 110000, rating: 5, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-NepTStjipxyh_gm9vhvJpdmvi4QxaxaTIx4S7jWR9A&s'},
+            {id: 7, name: '15 pro', price: 110000, rating: 5, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-NepTStjipxyh_gm9vhvJpdmvi4QxaxaTIx4S7jWR9A&s'},
         ]
         this._selectedType = {};
         this._selectedBrand = {};
