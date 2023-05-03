@@ -2,8 +2,9 @@ import React, { useContext, useState } from "react";
 import {Container, Form} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-//import Row from "react-bootstrap/Row";
 import {NavLink} from "react-router-dom";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "../utils/consts";
 import { useLocation, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { observer } from 'mobx-react-lite';
@@ -57,31 +58,28 @@ const Auth = observer( () => {
                         type='password'
                     />
 
-                    {isLogin ?
-                        <line className="d-flex justify-content-between mt-3">
-                            <div>
-                                Нет аккаунта?<br/> <NavLink to={REGISTRATION_ROUTE}>Зарегестрируйтесь!</NavLink>
+                    <Row className="d-flex justify-content-between mt-2 pl-3 pr-3">
+                        <Col>
+                        {isLogin ?
+                            <div className="auth_log">
+                                Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
                             </div>
-                            <Button 
-                                variant={"outline-success"}
-                                onClick={click}
-                            >
-                                Войти
-                            </Button>
-                        </line>
-                        :
-                        <line className="d-flex justify-content-between mt-3 pl-3 pr-3">
-                            <div className="mt-2">
-                                Есть аккаунт? <br/><NavLink to={LOGIN_ROUTE}>Войдите!</NavLink>
+                            :
+                            <div className="auth_log">
+                                Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войдите!</NavLink>
                             </div>
-                            <Button 
-                                variant={"outline-success"}
-                                onClick={click}
-                            >
-                                Зарегестрироваться
-                            </Button>
-                        </line>
-                    }
+                        }
+                        </Col>
+                        <Col>
+                        <Button
+                            className='button_log'
+                            variant={"outline-success"}
+                            onClick={click}
+                        >
+                            {isLogin ? 'Войти' : 'Регистрация'}
+                        </Button>
+                        </Col>
+                    </Row>
                 </Form>
             </Card>
         </Container>

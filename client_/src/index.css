@@ -15,6 +15,11 @@
     resize: none; /* Запрещаем изменять размер */
 }
 
+.button_log{
+    display: flex;
+    margin-left: 68%;
+}
+
 .row_auth{
     display: flex;
     justify-content: space-between;
