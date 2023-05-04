@@ -8,13 +8,13 @@ const BrandBar = observer( () => {
     const {device} = useContext(Context);
     return(
         <Container>
-            <Row className="d-flex">
+            <Row >
                 {device.brands.map(brand =>
-                    <Col>
+                    <Col className="d-flex p-3">
                         <Card
                             style={{cursor: "pointer"}}
                             key = {brand.id}
-                            className="p-3"
+                            className="p-2"
                             onClick={ () => device.setSelectedBrand(brand)}
                             border={brand.id === device.selectedBrand.id ? 'danger' : 'light'}
                         >

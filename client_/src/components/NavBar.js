@@ -13,8 +13,8 @@ const NavBar = observer( () => {
     const {user} = useContext(Context);
     const history = useHistory();
 
-    const logOut = (user) => {
-        user.setUser({});
+    const logOut = () => {
+        user.setUser({})
         user.setIsAuth(false);
     }
 

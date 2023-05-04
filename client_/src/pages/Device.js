@@ -17,14 +17,16 @@ const Device = () => {
                     <Image width={300} height={300} src={device.img}/>
                 </Col>
                 <Col md={4}>
-                    <line className="d-flex flex-column align-items-center" >
-                        <h2>{device.name}</h2>
-                        <div className=" d-flex align-items-center justify-content-center star"
-                            
-                        >
-                            {device.rating}
-                        </div>
-                    </line>
+                    <Row>
+                        <Col className="d-flex flex-column align-items-center">
+                            <h2>{device.name}</h2>
+                            <div className=" d-flex align-items-center justify-content-center star"
+                                
+                            >
+                                {device.rating}
+                            </div>
+                        </Col>
+                    </Row>
                 </Col>
                 <Col md={4}>
                     <Card

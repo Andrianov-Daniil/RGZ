@@ -7,7 +7,6 @@ import { DEVICE_ROUTE } from "../utils/consts";
 const DeviceItem = ({device}) => {
     const history = useHistory();
     
-    console.log(history);
     return(
         <Col md={4} className='col' onClick={() => history.push(DEVICE_ROUTE + '/' + device.id)}>
             <Card className='device'>
@@ -18,7 +17,7 @@ const DeviceItem = ({device}) => {
                     </div>
                     <div className='d-flex align-items-center'>
                         <div>{device.rating}</div>
-                        <i class='bx bx-star'></i>
+                        <i className='bx bx-star'></i>
                     </div>
                 </div>
                 <div className='m-2 mt-1'>{device.name}</div>
