@@ -6,11 +6,11 @@ export const createType = async (type) => {
 }
 
 export const fetchTypes = async () => {
-    const {data} = await $host.get('api/type');;
+    const {data} = await $host.get('api/type');
     return data;
 }
 
-export const createBrands = async (brand) => {
+export const createBrand = async (brand) => {
     const {data} = await $authHost.post('api/brand', brand);
     return data;
 }
@@ -20,7 +20,7 @@ export const fetchBrands = async () => {
     return data;
 }
 
-export const createDevices = async (device) => {
+export const createDevice = async (device) => {
     const {data} = await $authHost.post('api/device', device);
     return data;
 }

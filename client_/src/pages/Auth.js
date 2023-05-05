@@ -61,23 +61,34 @@ const Auth = observer( () => {
                     <Row className="d-flex justify-content-between mt-2 pl-3 pr-3">
                         <Col>
                         {isLogin ?
-                            <div className="auth_log">
-                                Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
+                            <div>
+                                Нет аккаунта?<br/><NavLink to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
                             </div>
                             :
-                            <div className="auth_log">
-                                Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войдите!</NavLink>
+                            <div>
+                                Есть аккаунт? <br/><NavLink to={LOGIN_ROUTE}>Войдите!</NavLink>
                             </div>
                         }
                         </Col>
                         <Col>
-                        <Button
-                            className='button_log'
-                            variant={"outline-success"}
-                            onClick={click}
-                        >
-                            {isLogin ? 'Войти' : 'Регистрация'}
-                        </Button>
+
+                        {isLogin ? 
+                            <Button
+                                className='button_log_1'
+                                variant={"outline-success"}
+                                onClick={click}
+                            >
+                                Войти
+                            </Button>
+                        :
+                            <Button
+                                className='button_log_2'
+                                variant={"outline-success"}
+                                onClick={click}
+                            >
+                                Регистрация
+                            </Button> 
+                        }
                         </Col>
                     </Row>
                 </Form>

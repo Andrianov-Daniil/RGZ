@@ -15,9 +15,12 @@
     resize: none; /* Запрещаем изменять размер */
 }
 
-.button_log{
-    display: flex;
-    margin-left: 68%;
+.button_log_1{
+    margin-left: 70%;
+}
+
+.button_log_2{
+    margin-left: 45%;
 }
 
 .row_auth{

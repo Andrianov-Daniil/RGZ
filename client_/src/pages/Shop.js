@@ -15,6 +15,7 @@ const Shop = () => {
         fetchBrands().then(data => device.setBrands(data));
         fetchDevices().then(data => device.setDevices(data.rows));
     }, [])
+    
     return(
         <Container>
             <Row className="mt-4">
