@@ -105,7 +105,7 @@ const HouseInfo = sequelize.define( 'house_info',{
 User.hasMany(House);
 House.belongsTo(User);
 
-House.hasMany(HouseInfo);
+House.hasMany(HouseInfo, {as: 'info'});
 HouseInfo.belongsTo(House);
 
 House.hasOne(Address, { onDelete: "cascade"});
@@ -118,5 +118,6 @@ module.exports = {
     User, 
     House,
     Address,
+    HouseInfo,
     Type
 }

@@ -32,20 +32,17 @@ class HouseController{
             else if (entrance && !flat){
                 return next(ApiError.badRequest('Укажите номер квартиры'));
             }
-            
 
-
-
-            // if(info){
-            //     info = JSON.parse(info);
-            //     info.forEach( i => 
-            //         HouseInfo.create({
-            //             title: i.title,
-            //             descrioption: i.descrioption,  
-            //             deviceId: house.id
-            //         })
-            //     )
-            // }
+            if(info){
+                info = JSON.parse(info);
+                info.forEach( i => 
+                    HouseInfo.create({
+                        title: i.title,
+                        descrioption: i.descrioption,  
+                        deviceId: house.id
+                    })
+                )
+            }
 
             return res.json(house);
         }
@@ -56,22 +53,16 @@ class HouseController{
 
     //получение
     async getAll (req, res){
-        let {brandId, typeId, limit, page} = req.query;
+        let {typeId, limit, page} = req.query;
         page = page || 1;
         limit = limit || 9;
         let offset = page * limit - limit;
         let house;
-        if(!brandId && !typeId){
+        if(!typeId){
             house = await House.findAndCountAll({limit, offset});
         }
-        else if(brandId && !typeId){
-            house = await House.findAndCountAll({where:{brandId}, limit, offset});
-        }
-        else if(!brandId && typeId){
-            house = await House.findAndCountAll({where:{typeId}, limit, offset});
-        }
         else{
-            house = await House.findAndCountAll({where:{brandId, typeId}, limit, offset});
+            house = await House.findAndCountAll({where:{typeId}, limit, offset});
         }
         return res.json(house);
     }
