@@ -61,14 +61,14 @@ const Address = sequelize.define('address',{
     },
     number:{//номер дома
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: false
     },
     entrance: {//подъезд
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true
     },
     flat:{//квартира
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true
     }
 });
