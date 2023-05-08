@@ -4,13 +4,17 @@ export default class HouseStore {
     constructor() {
         this._types = [
             {id: 1, name: "Однокомнатная"},
-            {id: 2, name: "Двухкомнатная"}
+            {id: 2, name: "Однокомнатная студия"},
+            {id: 3, name: "Двухкомнатная"}
         ];
         this._houses = [
             {id: 1, price: "1000", img:''},
-            {}
+            {id: 2, price: "1000", img:''},
+            {id: 3, price: "1000", img:''},
+            {id: 4, price: "1000", img:''},
+            {id: 5, price: "1000", img:''}
         ];
-        this._selectedType = {};
+        this._selectedType = [];
         this._page = 1;
         this._totalCount = 0;
         this._limit = 4;
@@ -24,9 +28,9 @@ export default class HouseStore {
         this._houses = houses;
     }
 
-    setSelectedType(type) {
+    setSelectedType(types) {
         this.setPage(1);
-        this._selectedType = type;
+        this._selectedType = types;
     }
 
     setPage(page) {

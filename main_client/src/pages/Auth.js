@@ -1,25 +1,23 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
 import {Container, Form} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
-import {NavLink, useLocation, useHistory} from "react-router-dom";
-import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../utils/consts";
+import {NavLink, useLocation} from "react-router-dom";
+import {LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 //import {login, registration} from "../http/userAPI";
-import {observer} from "mobx-react-lite";
-import {Context} from "../index";
+
 
 const Auth = () => {
     const location = useLocation();
-    console.log(location);
     const isLogin = location.pathname === LOGIN_ROUTE;
     return(
         <Container
             className="d-flex justify-content-center align-items-center Auth"
         >
             <Card style={{width: 600}} className="p-3">
-                <h2 className="m-auto">{isLogin ? 'Авторизация' :'Регистрация'}</h2>
+                <h2 className="m-auto mb-4">{isLogin ? 'Авторизация' :'Регистрация'}</h2>
                 <Form className="d-flex flex-column">
                     <Form.Control
                         className='mt-3'

@@ -17,15 +17,19 @@ const NavBar = observer(() => {
                         <Button variant={'outline-light'}>
                             Админ панель
                         </Button>
-                        <Button variant={'outline-light'} className="NavBar" onClick={() => user.setIsAuth(!user.isAuth)} >
-                            Выйти
-                        </Button>
+                        <NavLink to={LOGIN_ROUTE}>
+                            <Button variant={'outline-light'} className="NavBar" onClick={() => user.setIsAuth(!user.isAuth)} >
+                                Выйти
+                            </Button>
+                        </NavLink>
                     </Nav>
                     :
                     <Nav className="ml-auto">
-                        <Button variant={'outline-light'} onClick={() => user.setIsAuth(!user.isAuth)}>
-                            Авторизация
-                        </Button>
+                        <NavLink to={LOGIN_ROUTE}>
+                            <Button to={LOGIN_ROUTE} variant={'outline-light'} onClick={() => user.setIsAuth(!user.isAuth)}>
+                                Авторизация
+                            </Button>
+                        </NavLink>
                     </Nav>
                 }
             </Container>

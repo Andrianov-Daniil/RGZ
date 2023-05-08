@@ -10,7 +10,7 @@ export const Context = createContext(null);
 ReactDOM.render(
   <Context.Provider value={{
       user: new UserStore(),
-      device: new HouseStore(),
+      house: new HouseStore(),
   }}>
       <App />
   </Context.Provider>,
