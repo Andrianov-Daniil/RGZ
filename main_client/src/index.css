@@ -1,0 +1,254 @@
+
+*{
+  margin: 0;
+}
+
+.wrapper{
+    width: 80%;
+    margin: 40px auto;
+}
+
+body{
+  background-color: rgb(232, 231, 234);
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 100;
+  font-size: 25px;
+}
+
+.NavBar{
+    margin-left: 20px;
+}
+
+.Auth{
+    margin-top: 150px;
+}
+
+.button_log_1{
+    margin-left: 75%;
+}
+
+.button_log_2{
+    margin-left: 57%;
+}
+
+header .logo{
+    color: #ffffff;
+    padding-left: 80px;
+    align-items: center;
+    font-size: 70px;
+    font-family: 'Monofett', cursive;
+}
+
+.nav{
+    padding-right: 90px;
+    display: flex;
+    float: right;
+    list-style: none;
+}
+
+header ul.nav li{
+    padding-left: 50px;
+    padding-top: 30px;
+    cursor: pointer;
+    transition: opacity 400ms ease;
+}
+
+header ul.nav li:hover{
+    opacity: 0.5;
+}
+
+header .presentation{
+    margin: 50px auto;
+    width: 1150px;
+    height: 650px;
+    background-size: cover;
+    background-position: center center;
+    background-blend-mode: multiply;
+    background-color: rgba(27, 23, 24, 0.178);
+    border-radius: 50px;
+    position: relative;
+}
+
+header .presentation::after{
+    content: 'Лабораторная работа Андрианов и Баймурзаев';
+    position: absolute;
+    top: 450px;
+    left: 50px;
+    width: 400px;
+    font-family: 'Bad Script', cursive;
+    font-size: 35px;
+    font-weight: 600;
+    color: black;
+}
+
+footer{
+    text-align: center;
+}
+
+main{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+main .Game{
+    justify-content: space-between;
+    padding: 2%;
+    width: 300px;
+    height: 500px;
+    margin-bottom: 50px;
+    background: #bfbcbc;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.5s ease ;
+    position: relative;
+}
+
+.title{
+    font-size: 50px;
+}
+
+img{
+    margin-top: 10px;
+    width: 100%;
+    height: 50%;
+}
+
+main .Game:hover{
+    transform: scale(1.07);
+    background-color: #e7e2e2;
+}
+
+main .play{
+    position: absolute;
+    right: 5%;
+    bottom: 8%;
+    width: 45%;
+    height: 11%;
+    background-color: #e7e2e200;
+    color: #2196f3;
+    font-size: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-block;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.center{
+    margin: 9% 17%;
+}
+
+/* a{
+    border: 0;
+    position: relative;
+    padding: 1px;
+    letter-spacing: 1px;
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+a:hover {
+    box-shadow: 0 0 10px #2196f3, 0 0 30px #2196f3, 0 0 50px #2196f3;
+    background-color: #2196f3;
+    transition-delay: 0.5s;
+    color: #fefefe;
+}
+
+.a_line{
+    position: absolute;
+    display: block;
+}
+
+.a_line--top{
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #2196f3);
+}
+
+a:hover .a_line--top{
+    left: +100%;
+    transition: 0.5s;
+    transition-delay: 0.25s;
+}
+
+.a_line--bottom{
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(-90deg, transparent, #2196f3);
+}
+
+a:hover .a_line--bottom{
+    right: 100%;
+    transition: 0.5s;
+    transition-delay: 0.25s;
+}
+
+.a_line--left{
+    left: 0;
+    bottom: -100%;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(0deg, transparent, #2196f3);
+}
+
+a:hover .a_line--left{
+    bottom: 100%;
+    transition: 0.5s;
+    transition-delay: 0s;
+}
+
+.a_line--right{
+    right: 0;
+    top: -100%;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #2196f3);
+}
+
+a:hover .a_line--right{
+    top: 100%;
+    transition: 0.5s;
+    transition-delay: 0s;
+} */
+
+.I_have_game{
+    padding-bottom: 40px;
+}
+
+.discount{
+    color: rgb(97, 97, 97);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+main h1,
+main p1,
+main li,
+main del{
+    padding-bottom: 3%;
+    padding-right: 20%;
+    width: 200px;
+    margin: 10px 20px;
+    color:rgb(20, 18, 24);
+    font-size: 30px;
+}
+
+.now_price{
+    color: rgb(31, 187, 31);
+    margin: 10px 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+main p1{
+    color: rgb(31, 187, 31);
+    font-size: 20px;
+    font-weight: 600;
+}
