@@ -33,6 +33,7 @@ const House = () => {
                 </Col>
             </Row>
             <Row className="d-flex flex-column m-3">
+                <h1>Характеристики</h1>
                 {description.map((info, index) => 
                     <Row key={info.id} style={{background: index % 2 === 0 ? 'lightgray' : 'transparent', padding: 10}}>
                         {info.title} : {info.description}
