@@ -8,11 +8,11 @@ export default class HouseStore {
             {id: 3, name: "Двухкомнатная"}
         ];
         this._houses = [
-            {id: 1, price: "1000", img:''},
-            {id: 2, price: "1000", img:''},
-            {id: 3, price: "1000", img:''},
-            {id: 4, price: "1000", img:''},
-            {id: 5, price: "1000", img:''}
+            {id: 1, price: "1000", typeId: "1", userId: "1", img:'https://img.freepik.com/free-vector/a-sticker-template-with-mini-house-isolated_1308-60687.jpg'},
+            {id: 2, price: "1000", typeId: "1", userId: "1", img:'https://img.freepik.com/free-vector/a-sticker-template-with-mini-house-isolated_1308-60687.jpg'},
+            {id: 3, price: "1000", typeId: "1", userId: "1", img:'https://img.freepik.com/free-vector/a-sticker-template-with-mini-house-isolated_1308-60687.jpg'},
+            {id: 5, price: "1000", typeId: "1", userId: "1", img:'https://img.freepik.com/free-vector/a-sticker-template-with-mini-house-isolated_1308-60687.jpg'},
+            {id: 4, price: "1000", typeId: "1", userId: "1", img:'https://img.freepik.com/free-vector/a-sticker-template-with-mini-house-isolated_1308-60687.jpg'}
         ];
         this._selectedType = [];
         this._page = 1;

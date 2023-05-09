@@ -10,7 +10,7 @@ const Shop = () => {
                 <Col md={3}>
                     <TypeBar />
                 </Col>
-                <Col>
+                <Col md={9}>
                     <HouseList/>
                 </Col>
             </Row>

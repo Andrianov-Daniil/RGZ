@@ -16,3 +16,14 @@ const HouseList = observer(() => {
 });
 
 export default HouseList;
+
+// <Row className="d-flex">
+        //     {house.houses.map((house_1) => 
+        //         {house.types.map((type) => {
+        //             (type.id === house_1.typeId) ?
+        //                 () => <HouseItem key={house_1.id} house={house_1} type={type} />
+        //                 :
+        //                 () =><HouseItem key={house_1.id} house={house_1} type={type} />
+        //         })}
+        //     )}
+        // </Row>
