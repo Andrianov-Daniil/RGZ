@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import TypeBar from "../components/TypeBar";
+import {observer} from "mobx-react-lite";
 import HouseList from "../components/HouseList";
+import { Context } from "..";
 
-const Shop = () => {
+const Shop = observer( () => {
+    const {user} = useContext(Context)
+    console.log(user);
     return(
         <Container>
             <Row className="mt-4">
@@ -16,6 +20,6 @@ const Shop = () => {
             </Row>
         </Container>
     )
-}
+})
 
 export default Shop;

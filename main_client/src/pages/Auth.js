@@ -10,6 +10,7 @@ import { login, registration } from '../http/userAPI';
 import { observer } from "mobx-react-lite";
 import { Context } from '../index';
 
+
 const Auth = observer (() => {
     const {user} = useContext(Context);
     const location = useLocation();
@@ -26,13 +27,14 @@ const Auth = observer (() => {
                 data = await login(email, password);
             }else{
                 data = await registration(email, password);
-            }    
+            }
+            console.log(user);
             user.setUser(data);
-            user.setIsAuth(true);
+            // user.setIsAuth(true);
             history.push(SHOP_ROUTE);
         }
         catch(e){
-            alert(e.response.data.message);
+            alert("ХЗ");
         }
     }
 
@@ -40,8 +42,9 @@ const Auth = observer (() => {
         <Container
             className="d-flex justify-content-center align-items-center Auth"
         >
+        {!user.isAuth ? 
             <Card style={{width: 600}} className="p-3">
-                <h2 className="m-auto mb-4">{isLogin ? 'Авторизация' :'Регистрация'}</h2>
+                <h2 className="m-auto mb-4">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
                 <Form className="d-flex flex-column">
                     <Form.Control
                         className='mt-3'
@@ -65,7 +68,7 @@ const Auth = observer (() => {
                             </div>
                             :
                             <div>
-                                Есть аккаунт? <br/><NavLink to={LOGIN_ROUTE}>Войдите!</NavLink>
+                                Есть аккаунт? <br/><NavLink to={LOGIN_ROUTE}>Войти!</NavLink>
                             </div>
                         }
                         </Col>
@@ -89,10 +92,11 @@ const Auth = observer (() => {
                         }
                         </Col>
                     </Row>
-
-
                 </Form>
             </Card>
+            :
+            history.push(SHOP_ROUTE)
+        }
         </Container>
     )
 })

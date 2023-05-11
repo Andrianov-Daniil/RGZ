@@ -10,18 +10,23 @@ import { useHistory } from "react-router-dom";
 const NavBar = observer(() => {
     const {user} = useContext(Context);
     const history = useHistory();
-    console.log(user);
+
+    const logOut = () => {
+        user.setUser({})
+        user.setIsAuth(false);
+    }
+
     return(
         <Navbar bg="primary" variant="dark">
             <Container>
                 <NavLink style = {{color: 'white'}} to={SHOP_ROUTE}>Мир квартир</NavLink>
-                {(user.isAuth) && (user.role === "ADMIN") ?
+                 {(user.isAuth) /*&& (user.role === "ADMIN")*/ ? 
                     <Nav className="ml-auto">
                         <Button variant={'outline-light'}  onClick={() => history.push(ADMIN_ROUTE)}>
                             Админ панель
                         </Button>
                         <NavLink to={LOGIN_ROUTE}>
-                            <Button variant={'outline-light'} className="NavBar" onClick={() => history.push(LOGIN_ROUTE)} >
+                            <Button variant={'outline-light'} className="NavBar" onClick={() =>logOut()} >
                                 Выйти
                             </Button>
                         </NavLink>
@@ -29,7 +34,7 @@ const NavBar = observer(() => {
                     :
                     <Nav className="ml-auto">
                         <NavLink to={LOGIN_ROUTE}>
-                            <Button to={LOGIN_ROUTE} variant={'outline-light'}>
+                            <Button variant={'outline-light'} onClick={() => history.push(LOGIN_ROUTE)}>
                                 Авторизация
                             </Button>
                         </NavLink>
