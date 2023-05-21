@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-// import { createType } from '../../http/deviceAPI';
+import { createType } from '../../http/houseAPI';
 
 const CreateType = ({show, onHide}) => {
     const [value, setValue] = useState('');
-    // const addType = () =>{
-    //     createType({name: value}).then(data => {
-    //         setValue('');
-    //         onHide();
-    //     })
-    // }
+    
+    const addType = () =>{
+        if(value === ""){
+            return alert("Введите название типа");
+        }
+        createType({name: value}).then(data => {
+            setValue('');
+            onHide();
+        })
+    }
 
     return(
         <Modal
@@ -26,16 +30,16 @@ const CreateType = ({show, onHide}) => {
             <Modal.Body>
                 <Form>
                     <Form.Control
-                        // value={value}
-                        // onChange={e => setValue(e.target.value)}
+                        value={value}
+                        onChange={e => setValue(e.target.value)}
                         placeholder='Введите название типа'
                     />
                 </Form>
                 
             </Modal.Body>
             <Modal.Footer>
-                 <Button variant='outline-danger' onClick={onHide} >Закрыть</Button> 
-                <Button variant='outline-success' onClick={onHide}>Добавить</Button>
+                <Button variant='outline-danger' onClick={onHide} >Закрыть</Button> 
+                <Button variant='outline-success' onClick={addType}>Добавить</Button>
             </Modal.Footer>
         </Modal>
     )

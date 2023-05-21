@@ -17,24 +17,55 @@ const Auth = observer (() => {
     const history = useHistory();
     const isLogin = location.pathname === LOGIN_ROUTE;
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [repeat_password, setRepeat_password] = useState('');
+    const mailRegEx = {
+        ename: /^[\w.*-]+/,
+        edog:  /^([\w.*-]+@)/,
+        ecom:  /^([\w.*-]+@([\w]+\.)+[\w]{2,4})?$/
+    }
 
     const click = async () => {
         try{
             let data;
+            if (email === ""){
+                return alert("Введите email!");
+            }
+            if (!mailRegEx.ename.test(email)) {
+                return alert("Недопустимые символы в email!");
+            }
+            if (!mailRegEx.edog.test(email)) {
+                return alert("Email должен содержать символ @!");
+            } 
+            if (!mailRegEx.ecom.test(email)) {
+                return alert("Неправильный домен почты!");
+            }
+            if(password === ""){
+                return alert("Введите пароль!");
+            }
+
             if(isLogin){
                 data = await login(email, password);
+                if(data.id){
+                    user.setUser(data);
+                    user.setIsAuth(true);
+                  }
+                // user.setUser(data);
+                // user.setIsAuth(true);
+                // history.push(SHOP_ROUTE);
             }else{
+                if(repeat_password != password){
+                    setPassword("");
+                    setRepeat_password("");
+                    return alert("Пароли не совпадают!");
+                }
                 data = await registration(email, password);
+                history.push(LOGIN_ROUTE);
             }
-            console.log(user);
-            user.setUser(data);
-            // user.setIsAuth(true);
-            history.push(SHOP_ROUTE);
         }
         catch(e){
-            alert("ХЗ");
+            alert(e.response.data.message);
         }
     }
 
@@ -47,6 +78,7 @@ const Auth = observer (() => {
                 <h2 className="m-auto mb-4">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
                 <Form className="d-flex flex-column">
                     <Form.Control
+                        name='email'
                         className='mt-3'
                         placeholder="Введите email..."
                         value={email}
@@ -59,6 +91,17 @@ const Auth = observer (() => {
                         type='password'
                         onChange={e => setPassword(e.target.value)}
                     />
+                    {isLogin ? 
+                        <></>
+                        :
+                        <Form.Control
+                            className='mt-3'
+                            placeholder="Повторите пароль..."
+                            value={repeat_password}
+                            type='password'
+                            onChange={e => setRepeat_password(e.target.value)}
+                        />
+                        }
 
                     <Row className="d-flex justify-content-between mt-2 pl-3 pr-3">
                         <Col className='m-2'>

@@ -11,17 +11,26 @@ const App = observer(() => {
   const {user} = useContext(Context);
   const [loading, setLoading] = useState(true);
 
-  useEffect( () => {
-      check().then(data => {
-        user.setUser(true);
-        user.setIsAuth(true);
-      }).finally( () => setLoading(false))
-  }, [])
+  useEffect( () => 
+    {
+      try{
+        check().then(data => {
+          if(data.id){
+            user.setUser(data);
+            user.setIsAuth(true);
+            //localStorage.clear();
+          }
+        }).finally( () => setLoading(false))
+      }
+      catch(e){
+        alert("Вы не авторизованы");
+      }      
+    },
+    [])
 
   if(loading){
     return <Spinner animation="grow"/>
   }
-
 
   return (
     <BrowserRouter>

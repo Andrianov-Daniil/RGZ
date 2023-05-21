@@ -4,7 +4,8 @@ import { useHistory } from "react-router-dom";
 import { HOUSE_ROUTE } from "../utils/consts";
 
 const HouseItem = ({house}) => {
-    const history = useHistory()
+    const history = useHistory();
+    console.log(house);
     return(
         <Col md={3} className="m-3" onClick={() => history.push(HOUSE_ROUTE + '/' + house.id)}>
             <Card
@@ -12,7 +13,7 @@ const HouseItem = ({house}) => {
                 border={"light"}
                 className="p-3"
             >
-                <Image width={150} height={150} src={house.img} />
+                <Image width={150} height={150} src={process.env.REACT_APP_API_URL + house.img} />
                 <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
                     <div>Name...</div>
                 </div>

@@ -14,16 +14,13 @@ const generateJwt = (id, email, role) => {
 class UserController{
     //регистрация
     async registration (req, res, next){
-        const {email, password, role, phone} = req.body;
+        const {email, password, role} = req.body;
 
         if(!email){
             return next(ApiError.badRequest('Введите email!'));
         }
         if(!password){
             return next(ApiError.badRequest('Введите пароль!'));
-        }
-        if(!phone){
-            return next(ApiError.badRequest('Введите номер телефона!'));
         }
 
         const candidate = await User.findOne({where: {email}});
@@ -32,7 +29,7 @@ class UserController{
         }
         
         const hashPassword = await bcrypt.hash(password, 5);
-        const user = await User.create({email, role, phone, password: hashPassword});
+        const user = await User.create({email, role, password: hashPassword});
         const token = generateJwt(user.id, user.email, user.role);
         return res.json({token});
     }
@@ -59,16 +56,7 @@ class UserController{
     }
 
     //проверка авторизован пользователь или нет
-    async chek (req, res, next){
-
-        // res.json({message: "working"});
-
-        // const {id} = req.query;
-        // if(!id){
-        //     return next(ApiError.badRequest('Не указан id'));
-        // }
-        // res.json(id);
-        
+    async check (req, res, next){
         const token = generateJwt(req.user.id, req.user.email, req.user.role);
         res.json({token});
     }

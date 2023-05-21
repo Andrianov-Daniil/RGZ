@@ -14,6 +14,7 @@ module.exports = function (req, res, next){
         next();
     }
     catch (e){
-        res.status(401).json({message: "Пользователь не автоизован!"});
+        req.user = {};
+        next();
     }
 }

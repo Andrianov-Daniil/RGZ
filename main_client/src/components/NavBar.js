@@ -14,19 +14,24 @@ const NavBar = observer(() => {
     const logOut = () => {
         user.setUser({})
         user.setIsAuth(false);
+        user.setIsAdmin(false);
     }
 
     return(
         <Navbar bg="primary" variant="dark">
             <Container>
                 <NavLink style = {{color: 'white'}} to={SHOP_ROUTE}>Мир квартир</NavLink>
-                 {(user.isAuth) /*&& (user.role === "ADMIN")*/ ? 
+                 {(user.isAuth) ? 
                     <Nav className="ml-auto">
-                        <Button variant={'outline-light'}  onClick={() => history.push(ADMIN_ROUTE)}>
-                            Админ панель
-                        </Button>
+                        {(user.user.role === "ADMIN") ?
+                            <Button variant={'outline-light'}  onClick={() => history.push(ADMIN_ROUTE)}>
+                                Админ панель
+                            </Button>
+                            :
+                            <></>
+                        }
                         <NavLink to={LOGIN_ROUTE}>
-                            <Button variant={'outline-light'} className="NavBar" onClick={() =>logOut()} >
+                            <Button variant={'outline-light'} className="NavBar" onClick={() => {logOut(); localStorage.clear();}} >
                                 Выйти
                             </Button>
                         </NavLink>

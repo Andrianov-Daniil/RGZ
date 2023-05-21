@@ -44,7 +44,7 @@ class HouseController{
                 )
             }
 
-            return res.json(house);
+            return res.json(house, address);
         }
         catch(e){
             next(ApiError.badRequest(e.message));
