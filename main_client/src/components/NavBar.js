@@ -6,6 +6,8 @@ import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from "../utils/consts";
 import {observer} from "mobx-react-lite";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory } from "react-router-dom";
+import logo from '../assets/1.png'
+import Image from "react-bootstrap/Image";
 
 const NavBar = observer(() => {
     const {user} = useContext(Context);
@@ -20,7 +22,7 @@ const NavBar = observer(() => {
     return(
         <Navbar bg="primary" variant="dark">
             <Container>
-                <NavLink style = {{color: 'white'}} to={SHOP_ROUTE}>Мир квартир</NavLink>
+                <NavLink className="logo" to={SHOP_ROUTE}> <Image className="logo_img" width={35} height={35} src={logo}/>Мир квартир</NavLink>
                  {(user.isAuth) ? 
                     <Nav className="ml-auto">
                         {(user.user.role === "ADMIN") ?

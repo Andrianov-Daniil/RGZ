@@ -11,20 +11,21 @@ class HouseController{
             const {img} = req.files;
             let fileName = uuid.v4() + ".jpg";
             img.mv(path.resolve(__dirname, '..' , 'static', fileName));
+            var house;
             if(entrance && flat){
-                const house = await House.create({price, typeId, userId, img: fileName});
+                house = await House.create({price, typeId, userId, img: fileName});
                 let houseId = house.id;
                 const address = await Address.create({city, street, number, entrance, flat, houseId});
             }
             //у помещения может не быть подъезда и квартиры (частный дом)
             else if(!entrance && !flat){
-                const house = await House.create({price, typeId, userId, img: fileName});
+                house = await House.create({price, typeId, userId, img: fileName});
                 let houseId = house.id;
                 const address = await Address.create({city, street, number, houseId});
             }
             //может не быть подъезда, зато есть квартира (частный дом разделённый на 2 части)
             else if (!entrance && flat){
-                const house = await House.create({price, typeId, userId, img: fileName});
+                house = await House.create({price, typeId, userId, img: fileName});
                 let houseId = house.id;
                 const address = await Address.create({city, street, number, flat, houseId});
             }
@@ -44,9 +45,11 @@ class HouseController{
                 )
             }
 
-            return res.json(house, address);
+            return res.json(house);
         }
-        catch(e){
+        catch(e){//нужно добавить удаление
+            var id = house.id;
+            House.destroy({where: {id}})
             next(ApiError.badRequest(e.message));
         }
     }
@@ -77,6 +80,12 @@ class HouseController{
             }
         )
         return res.json(house);
+    }
+
+    async delete(req, res) {
+        const {id} = req.body;
+        await House.destroy({where: {id}});
+        return res.json("Успешное удаление объявления");
     }
 }
 

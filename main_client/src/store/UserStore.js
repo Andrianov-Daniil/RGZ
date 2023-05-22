@@ -14,9 +14,9 @@ export default class UserStore{
     setUser(user){
         this._user = user;
     }
-    setIsAdmin(bool){
-        this._isAdmin = bool;
-    }
+    // setIsAdmin(bool){
+    //     this._isAdmin = bool;
+    // }
     
     get isAuth(){
         return this._isAuth;
@@ -24,7 +24,7 @@ export default class UserStore{
     get user(){
         return this._user;
     }
-    get isAdmin(){
-        return this._isAdmin;
-    }
+    // get isAdmin(){
+    //     return this._isAdmin;
+    // }
 }

@@ -15,6 +15,26 @@
 }
 
 .red{
-    
     border-color: brown;
+}
+
+.logo_img{
+    margin-bottom: 18px;
+    margin-right: 5px;
+}
+
+.logo{
+    color: white;
+    font-size: 30px;
+    text-decoration: none;
+    margin-top: 3px;
+}
+
+.logo:hover {
+    color: #b6c0dd; /* Цвет ссылки при наведении */ 
+    transition: 0.5s;
+}
+
+Button:hover{
+    transition: 0.4s;
 }
