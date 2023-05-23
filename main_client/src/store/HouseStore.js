@@ -7,7 +7,7 @@ export default class HouseStore {
         this._selectedType = [];
         this._page = 1;
         this._totalCount = 0;
-        this._limit = 4;
+        this._limit = 3;
         makeAutoObservable(this);
     }
 
@@ -40,6 +40,7 @@ export default class HouseStore {
     get selectedType() {
         return this._selectedType;
     }
+    
     get totalCount() {
         return this._totalCount;
     }

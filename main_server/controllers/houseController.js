@@ -34,13 +34,14 @@ class HouseController{
                 return next(ApiError.badRequest('Укажите номер квартиры'));
             }
 
+            let houseId = house.id;
             if(info){
                 info = JSON.parse(info);
                 info.forEach( i => 
                     HouseInfo.create({
                         title: i.title,
-                        descrioption: i.descrioption,  
-                        deviceId: house.id
+                        description: i.description,  
+                        houseId: houseId
                     })
                 )
             }
@@ -76,12 +77,13 @@ class HouseController{
         const house = await House.findOne(
             {
                 where: {id},
-                include: [{model: HouseInfo, as: 'info'}]
+                include: [{model: HouseInfo, as: 'info'}],
             }
         )
         return res.json(house);
     }
 
+    //Удаление
     async delete(req, res) {
         const {id} = req.body;
         await House.destroy({where: {id}});

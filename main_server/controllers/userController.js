@@ -14,13 +14,16 @@ const generateJwt = (id, email, role) => {
 class UserController{
     //регистрация
     async registration (req, res, next){
-        const {email, password, role} = req.body;
+        const {email, password, role, phone} = req.body;
 
         if(!email){
             return next(ApiError.badRequest('Введите email!'));
         }
         if(!password){
             return next(ApiError.badRequest('Введите пароль!'));
+        }
+        if(!phone){
+            return next(ApiError.badRequest('Введите номер телефона!'));
         }
 
         const candidate = await User.findOne({where: {email}});
@@ -29,7 +32,7 @@ class UserController{
         }
         
         const hashPassword = await bcrypt.hash(password, 5);
-        const user = await User.create({email, role, password: hashPassword});
+        const user = await User.create({email, role, phone, password: hashPassword});
         const token = generateJwt(user.id, user.email, user.role);
         return res.json({token});
     }

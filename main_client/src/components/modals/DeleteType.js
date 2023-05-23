@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import { createType } from '../../http/houseAPI';
+import { deleteType } from '../../http/houseAPI';
 
-const CreateType = ({show, onHide}) => {
+const DeleteType = ({show, onHide}) => {
     const [value, setValue] = useState('');
     
-    const addType = () =>{
+    const delType = () =>{
         if(value === ""){
             return alert("Введите название типа");
         }
-        createType({name: value}).then(data => {
+        deleteType({name: value}).then(data => {
             setValue('');
             onHide();
         })
@@ -24,7 +24,7 @@ const CreateType = ({show, onHide}) => {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Добавить тип
+                    Удалить тип
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -38,11 +38,11 @@ const CreateType = ({show, onHide}) => {
                 
             </Modal.Body>
             <Modal.Footer>
-                <Button variant='outline-danger' onClick={onHide}>Закрыть</Button> 
-                <Button variant='outline-success' onClick={addType}>Добавить</Button>
+                <Button variant='outline-danger' onClick={onHide} >Закрыть</Button> 
+                <Button variant='outline-success' onClick={delType}>Добавить</Button>
             </Modal.Footer>
         </Modal>
     )
 }
 
-export default CreateType;
+export default DeleteType;

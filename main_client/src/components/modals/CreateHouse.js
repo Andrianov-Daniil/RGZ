@@ -37,7 +37,34 @@ const CreateHouse = observer(({show, onHide}) => {
     }
 
     const addHouse = () => {
-        console.log(info);
+        if (Number(price) <= 100 ){
+            return alert('Укажите корректную стоимость за месяц');
+        }
+        if(house.selectedType.name === undefined){
+            return alert("Выберите тип");
+        }
+        if(city === ""){
+            return alert("Введите название города");
+        }
+        if(street === ""){
+            return alert("Введите название улицы");
+        }
+        if(number === ""){
+            return alert("Введите номер дома");
+        }
+        if (price === ""){
+            return alert('Укажите стоимость за месяц');
+        }
+        if (Number(price) <= 100 ){
+            return alert('Укажите корректную стоимость за месяц');
+        }
+        if (entrance && !flat){
+            return alert('Укажите номер квартиры');
+        }
+        if (file === null){
+            return alert('Добавьте фото квартиры');
+        }
+
         const formData = new FormData();
         formData.append('city', city);
         formData.append('street', street);
@@ -84,7 +111,7 @@ const CreateHouse = observer(({show, onHide}) => {
                 <Form.Control value={number} className='mt-2' placeholder='Номер дома...' onChange={e => setNumber(e.target.value)}/>
                 <Form.Control value={entrance} className='mt-2' placeholder='Подъёзд (если имеется)...' onChange={e => setEntrance(e.target.value)}/>
                 <Form.Control value={flat} className='mt-2' placeholder='Номер квартиры (если имеется)...' onChange={e => setFlat(e.target.value)}/>
-                <Form.Control value={price} className='mt-2' placeholder='Стоимость за месяц в рублях...' onChange={e => setPrice(Number(e.target.value))}/>
+                <Form.Control value={price} type="number" maxlength="3" className='mt-2' placeholder='Стоимость за месяц в рублях...' onChange={e => setPrice(Number(e.target.value))}/>
                 <Form.Control className='mt-2' type='file' onChange={selectFile} />        
                 <hr/>
                 <Button onClick={addInfo} className='mb-2'>Добавить новое свойство</Button>

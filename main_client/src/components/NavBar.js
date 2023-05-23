@@ -16,7 +16,7 @@ const NavBar = observer(() => {
     const logOut = () => {
         user.setUser({})
         user.setIsAuth(false);
-        user.setIsAdmin(false);
+        // user.setIsAdmin(false);
     }
 
     return(
