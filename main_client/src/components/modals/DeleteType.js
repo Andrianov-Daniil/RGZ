@@ -38,8 +38,8 @@ const DeleteType = ({show, onHide}) => {
                 
             </Modal.Body>
             <Modal.Footer>
-                <Button variant='outline-danger' onClick={onHide} >Закрыть</Button> 
-                <Button variant='outline-success' onClick={delType}>Добавить</Button>
+                <Button variant='outline-danger' onClick={onHide}>Закрыть</Button> 
+                <Button variant='outline-success' onClick={delType}>Удалить</Button>
             </Modal.Footer>
         </Modal>
     )

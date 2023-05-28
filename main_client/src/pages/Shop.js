@@ -19,7 +19,7 @@ const Shop = observer( () => {
     }, [])
 
     useEffect(() => {
-        fetchHouses(house.selectedType.id, house.page, 2).then(data => {
+        fetchHouses(house.selectedType.id, house.page, 3).then(data => {
             house.setHouses(data.rows);
             house.setTotalCount(data.count);
         })

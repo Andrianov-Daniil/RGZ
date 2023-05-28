@@ -3,10 +3,10 @@ import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
 import {useParams} from 'react-router-dom'
 import { Context } from '..';
 import { fetchOneHouse } from '../http/houseAPI';
-//import {fetchOneDevice} from "../http/deviceAPI";
+
 
 const House = () => {
-    const [house, setHouse] = useState({info: []});
+    const [house, setHouse] = useState({info: [], add:[]});
     const {id} = useParams();
     useEffect(() => {
         fetchOneHouse(id).then(data => setHouse(data));
@@ -18,8 +18,28 @@ const House = () => {
                 <Col md={4}>
                     <Image width={300} height={300} src={process.env.REACT_APP_API_URL + house.img}/>
                 </Col>
-                <Col md={4} className='my-auto'>
-                    <h2 className='text-center'>{house.name}</h2>
+                <Col md={4} className='my-auto address'>
+                    {house.add.map((info, index) => 
+                        <Row key={info.id} style={{background: 'transparent', padding: 10}}>
+                            Город: {info.city} <h/>
+                            Улица: {info.street} <h/>
+                            Номер дома: {info.street} <h/>
+                            {info.entrance === null ?
+                                <></>
+                                :
+                                <>
+                                    Подъезд: {info.entrance} <h/>
+                                </>
+                            }
+                            {info.flat === null ?
+                                <></>
+                                :
+                                <>
+                                    Квартира: {info.flat} <h/>
+                                </>
+                            }
+                        </Row>
+                    )}
                 </Col>
                 <Col md={4}>
                     <Card

@@ -6,8 +6,8 @@ import DeleteType from "../components/modals/DeleteType";
 
 const Admin = () => {
     const [typeVisible, setTypeVisible] = useState(false);
-    const [deleteTypeVisible, setDeleteTypeVisible] = useState(false);
     const [houseVisible, setHouseVisible] = useState(false);
+    const [deleteTypeVisible, setDeleteTypeVisible] = useState(false);
 
     return(
         <Container className="d-flex flex-column">

@@ -38,3 +38,27 @@
 Button:hover{
     transition: 0.4s;
 }
+
+.pr-10{
+    padding-right: 10px;
+}
+
+.address{
+    font-size: 30px;
+}
+
+.tovar{
+    border-radius: 100%;
+    border: 2px;
+    border-color: black;
+}
+
+.Card{
+    will-change: transform;
+    transition: 0.6s;
+}
+
+.Card:hover{
+    transform: scale(1.06);
+}
+

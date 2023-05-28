@@ -63,10 +63,10 @@ class HouseController{
         let offset = page * limit - limit;
         let house;
         if(!typeId){
-            house = await House.findAndCountAll({limit, offset});
+            house = await House.findAndCountAll({limit, offset, include: [{model: Address, as: 'add'}]});
         }
         else{
-            house = await House.findAndCountAll({where:{typeId}, limit, offset});
+            house = await House.findAndCountAll({where:{typeId}, limit, offset, include: [{model: Address, as: 'add'}]});
         }
         return res.json(house);
     }
@@ -77,13 +77,26 @@ class HouseController{
         const house = await House.findOne(
             {
                 where: {id},
-                include: [{model: HouseInfo, as: 'info'}],
+                include: [{model: HouseInfo, as: 'info'}, {model: Address, as: 'add'}],
             }
         )
         return res.json(house);
     }
 
+    //получение адреса 
+    // async getOneAdress(req, res){
+    //     const {id} = req.params;
+    //     const address = await Address.findOne(
+    //         {
+    //             where: {id},
+    //             include: [{model: HouseInfo, as: 'info'}],
+    //         }
+    //     )
+    //     return res.json(house);
+    // }
+
     //Удаление
+    
     async delete(req, res) {
         const {id} = req.body;
         await House.destroy({where: {id}});

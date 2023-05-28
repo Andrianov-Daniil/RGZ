@@ -108,7 +108,7 @@ House.belongsTo(User);
 House.hasMany(HouseInfo, {as: 'info'});
 HouseInfo.belongsTo(House);
 
-House.hasOne(Address, { onDelete: "cascade"});
+House.hasMany(Address, {as: 'add'});
 Address.belongsTo(House);
 
 Type.hasMany(House);

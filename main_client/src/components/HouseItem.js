@@ -1,24 +1,39 @@
 import React from "react";
-import { Card, Col, Image } from "react-bootstrap";
+import { Card, Col, Image, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { HOUSE_ROUTE } from "../utils/consts";
 
 const HouseItem = ({house}) => {
     const history = useHistory();
-    console.log(house);
     return(
-        <Col md={3} className="m-3" onClick={() => history.push(HOUSE_ROUTE + '/' + house.id)}>
-            <Card
-                style={{cursor: 'pointer', width: 150}}
-                border={"light"}
-                className="p-3"
-            >
-                <Image width={150} height={150} src={process.env.REACT_APP_API_URL + house.img} />
-                <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
-                    <div>Name...</div>
-                </div>
-                <div>{house.price} ₽/мес.</div>
-            </Card>
+        <Col md={4}>
+            <div className="Card">
+                <Card border="primary" height={250} style={{cursor: 'pointer'}} onClick={() => history.push(HOUSE_ROUTE + '/' + house.id)}>
+                    <Card.Img height={250} variant="top" src={process.env.REACT_APP_API_URL + house.img} />
+                    <Card.Body>
+                    <Card.Title>{house.price} ₽/мес.</Card.Title>
+                    <Card.Text>
+                        Город: {house.add[0].city} <br/>
+                        Улица: {house.add[0].street} <br/>
+                        Номер дома: {house.add[0].street} <br/>
+                        {house.add[0].entrance === null ?
+                            <><br/></>
+                            :
+                            <>
+                                Подъезд: {house.add[0].entrance} <br/>
+                            </>
+                        }
+                        {house.add[0].flat === null ?
+                            <><br/></>
+                            :
+                            <>
+                                Квартира: {house.add[0].flat} <br/>
+                            </>
+                        }
+                    </Card.Text>
+                    </Card.Body>
+                </Card>
+            </div>
         </Col>
     )
 }
