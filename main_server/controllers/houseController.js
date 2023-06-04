@@ -57,9 +57,9 @@ class HouseController{
 
     //получение
     async getAll (req, res){
-        let {typeId, limit, page} = req.query;
+        let {typeId, limit, page, city, lowPrice, upPrice} = req.query;
         page = page || 1;
-        limit = limit || 9;
+        limit = limit || 20;
         let offset = page * limit - limit;
         let house;
         if(!typeId){
@@ -67,6 +67,54 @@ class HouseController{
         }
         else{
             house = await House.findAndCountAll({where:{typeId}, limit, offset, include: [{model: Address, as: 'add'}]});
+        }
+        if (city != null){
+            let count = parseInt(house.count);
+            house.rows = house.rows.filter(row => {
+                const filteredAdd = row.add.filter(addObj => addObj.city !== city);
+                const removedCount = row.add.length - filteredAdd.length;
+                count -= removedCount;
+                row.add = filteredAdd;
+                return filteredAdd.length > 0;
+            });
+            house.count = count;
+        }
+        if (lowPrice != null && upPrice != null){
+            let removedCount = 0;
+            for (let i = house.rows.length - 1; i >= 0; i--) {
+                const price = house.rows[i].price;
+
+                if (price < lowPrice || price > upPrice) {
+                    house.rows.splice(i, 1);
+                    removedCount++;
+                }
+            }
+            house.count -= removedCount;
+        }
+        else if (lowPrice == null && upPrice != null){
+            let removedCount = 0;
+            for (let i = house.rows.length - 1; i >= 0; i--) {
+                const price = house.rows[i].price;
+
+                if (price > upPrice) {
+                    house.rows.splice(i, 1);
+                    removedCount++;
+                }
+            }
+
+            house.count -= removedCount;
+        }
+        else if (lowPrice != null && upPrice == null){
+            let removedCount = 0;
+            for (let i = house.rows.length - 1; i >= 0; i--) {
+                const price = house.rows[i].price;
+
+                if (price < lowPrice) {
+                    house.rows.splice(i, 1);
+                    removedCount++;
+                }
+            }
+            house.count -= removedCount;
         }
         return res.json(house);
     }
