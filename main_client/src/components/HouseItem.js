@@ -15,20 +15,33 @@ const HouseItem = ({house}) => {
                     <Card.Text>
                         Город: {house.add[0].city} <br/>
                         Улица: {house.add[0].street} <br/>
-                        Номер дома: {house.add[0].street} <br/>
-                        {house.add[0].entrance === null ?
-                            <><br/></>
+                        Номер дома: {house.add[0].number} <br/>
+                        {house.add[0].entrance === null && house.add[0].flat === null ?
+                            <><br/><br/></>
                             :
+                            <></>
+                        }
+                        {house.add[0].entrance != null && house.add[0].flat != null ?
+                            <>
+                                Подъезд: {house.add[0].entrance} <br/>
+                                Квартира: {house.add[0].flat} <br/>
+                            </>
+                            :
+                            <></>
+                        }
+                        {house.add[0].entrance != null && house.add[0].flat === null ?
                             <>
                                 Подъезд: {house.add[0].entrance} <br/>
                             </>
-                        }
-                        {house.add[0].flat === null ?
-                            <><br/></>
                             :
+                            <></>
+                        }
+                        {house.add[0].entrance === null && house.add[0].flat != null ?
                             <>
-                                Квартира: {house.add[0].flat} <br/>
+                                Квартира: {house.add[0].flat} <br/><br/>
                             </>
+                            :
+                            <></>
                         }
                     </Card.Text>
                     </Card.Body>

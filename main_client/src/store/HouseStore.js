@@ -5,6 +5,8 @@ export default class HouseStore {
         this._types = [];
         this._houses = [];
         this._selectedType = [];
+        this._citys = [];
+        this._selectedCity = [];
         this._page = 1;
         this._totalCount = 0;
         this._limit = 3;
@@ -14,15 +16,20 @@ export default class HouseStore {
     setTypes(types) {
         this._types = types;
     }
+    setCitys(citys) {
+        this._city = citys;
+    }
     setHouses(houses) {
         this._houses = houses;
     }
-
-    setSelectedType(types) {
+    setSelectedType(type) {
         this.setPage(1);
-        this._selectedType = types;
+        this._selectedType = type;
     }
-
+    setSelectedCity(city) {
+        this.setPage(1);
+        this._selectedCity = city;
+    }
     setPage(page) {
         this._page = page;
     }
@@ -33,12 +40,18 @@ export default class HouseStore {
     get types() {
         return this._types;
     }
+    get citys() {
+        return this._citys;
+    }
     get houses() {
         return this._houses;
     }
     
     get selectedType() {
         return this._selectedType;
+    }
+    get selectedCity() {
+        return this._selectedCity;
     }
     
     get totalCount() {

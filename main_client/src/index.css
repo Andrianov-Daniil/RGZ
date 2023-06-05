@@ -62,3 +62,6 @@ Button:hover{
     transform: scale(1.06);
 }
 
+.lowPrice{
+    margin-top: 5px;
+}

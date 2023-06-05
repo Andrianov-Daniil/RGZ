@@ -7,6 +7,7 @@ import { fetchOneHouse } from '../http/houseAPI';
 
 const House = () => {
     const [house, setHouse] = useState({info: [], add:[]});
+    console.log(house);
     const {id} = useParams();
     useEffect(() => {
         fetchOneHouse(id).then(data => setHouse(data));
@@ -23,7 +24,7 @@ const House = () => {
                         <Row key={info.id} style={{background: 'transparent', padding: 10}}>
                             Город: {info.city} <h/>
                             Улица: {info.street} <h/>
-                            Номер дома: {info.street} <h/>
+                            Номер дома: {info.number} <h/>
                             {info.entrance === null ?
                                 <></>
                                 :
@@ -47,7 +48,7 @@ const House = () => {
                         style={{width: 300, height: 300, fontSize: 32, border: '5px solid lightgray'}}
                     >
                         <h3>{house.price} ₽/мес.</h3>
-                        <Button variant={"outline-dark"}>Связаться с владельцем</Button>
+                        <Button variant={"outline-dark"} onClick={e => alert("Номер владельца" )}>Связаться с владельцем</Button>
                     </Card>
                 </Col>
             </Row>
@@ -62,11 +63,5 @@ const House = () => {
         </Container>
     );
 };
-
-{/* {house.info.map((info, index) =>
-                    <Row key={info.id} style={{background: index % 2 === 0 ? 'lightgray' : 'transparent', padding: 10}}>
-                        {info.title}: {info.description}
-                    </Row>
-                )} */}
 
 export default House;

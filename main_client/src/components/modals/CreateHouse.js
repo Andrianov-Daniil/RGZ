@@ -36,6 +36,12 @@ const CreateHouse = observer(({show, onHide}) => {
         setFile(e.target.files[0]);
     }
 
+    const onlyNumbers = (input) => {
+        const filteredInput = input.replace(/\D/g, '');
+        return filteredInput;
+    }
+
+
     const addHouse = () => {
         if (Number(price) <= 100 ){
             return alert('Укажите корректную стоимость за месяц');
@@ -106,12 +112,12 @@ const CreateHouse = observer(({show, onHide}) => {
                         </Dropdown.Menu>
                     </Dropdown>
                 </Form>
-                <Form.Control value={city} className='mt-2' placeholder='Город...' onChange={e => setCity(e.target.value)}/>
-                <Form.Control value={street} className='mt-2' placeholder='Название улицы...' onChange={e => setStreet(e.target.value)}/>
-                <Form.Control value={number} className='mt-2' placeholder='Номер дома...' onChange={e => setNumber(e.target.value)}/>
-                <Form.Control value={entrance} className='mt-2' placeholder='Подъёзд (если имеется)...' onChange={e => setEntrance(e.target.value)}/>
-                <Form.Control value={flat} className='mt-2' placeholder='Номер квартиры (если имеется)...' onChange={e => setFlat(e.target.value)}/>
-                <Form.Control value={price} type="number" maxlength="3" className='mt-2' placeholder='Стоимость за месяц в рублях...' onChange={e => setPrice(Number(e.target.value))}/>
+                <Form.Control value={city} maxlength="30" className='mt-2' placeholder='Город...' onChange={e => setCity(e.target.value)}/>
+                <Form.Control value={street} maxlength="150" className='mt-2' placeholder='Название улицы...' onChange={e => setStreet(e.target.value)}/>
+                <Form.Control value={number} maxlength="5" className='mt-2' placeholder='Номер дома...' onChange={e => setNumber(e.target.value)}/>
+                <Form.Control value={entrance} maxlength="2" className='mt-2' placeholder='Подъёзд (если имеется)...' onChange={e => setEntrance(e.target.value)}/>
+                <Form.Control value={flat} maxlength="4" className='mt-2' placeholder='Номер квартиры (если имеется)...' onChange={e => setFlat(e.target.value)}/>
+                <Form.Control value={price} maxlength="7" className='mt-2' placeholder='Стоимость за месяц в рублях...' onChange={e => setPrice(onlyNumbers(e.target.value))}/>
                 <Form.Control className='mt-2' type='file' onChange={selectFile} />        
                 <hr/>
                 <Button onClick={addInfo} className='mb-2'>Добавить новое свойство</Button>

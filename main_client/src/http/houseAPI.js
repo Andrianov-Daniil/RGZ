@@ -20,9 +20,9 @@ export const createHouse = async (house) => {
     return data;
 }
 
-export const fetchHouses = async (typeId, page, limit) => {
+export const fetchHouses = async (typeId, page, limit, city, lowPrice, upPrice) => {
     const {data} = await $authHost.get('api/house', {params: {
-        typeId, page, limit
+        typeId, page, limit, city, lowPrice, upPrice
     }});
     return data;
 }

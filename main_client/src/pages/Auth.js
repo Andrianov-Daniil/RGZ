@@ -43,6 +43,7 @@ const Auth = observer (() => {
             if (!mailRegEx.ecom.test(email)) {
                 return alert("Неправильный домен почты!");
             }
+            
             if(password === ""){
                 return alert("Введите пароль!");
             }
@@ -55,11 +56,12 @@ const Auth = observer (() => {
                     history.push(SHOP_ROUTE);
                     user.setIsAuth(true);
                 }
-                
-                // user.setUser(data);
-                // user.setIsAuth(true);
-                // history.push(SHOP_ROUTE);
-            }else{
+            }
+
+            else{
+                if(password.length <= 4){
+                    return alert("Пароль слишком простой, минимальная длина пароля 5 символов!");
+                }
                 if(repeat_password != password){
                     setPassword("");
                     setRepeat_password("");
@@ -67,6 +69,9 @@ const Auth = observer (() => {
                 }
                 if(phone === ""){
                     return alert("Введите номер телефона!");
+                }
+                if(phone.length < 9){
+                    return alert("Введите коректный номер телефона! Пример записи (89141189372)");
                 }
                 data = await registration(email, password, phone);
                 history.push(LOGIN_ROUTE);
@@ -88,6 +93,7 @@ const Auth = observer (() => {
                     <h6 className="mt-3">Email:</h6>
                     <Form.Control
                         name='email'
+                        maxLength="50"
                         placeholder="Введите email..."
                         value={email}
                         onChange={e => setEmail(e.target.value)}
@@ -96,6 +102,7 @@ const Auth = observer (() => {
                     <h6 className="mt-3">Пароль:</h6>
                     <Form.Control
                         placeholder="Введите пароль..."
+                        maxLength="16"
                         value={password}
                         type='password'
                         onChange={e => setPassword(e.target.value)}
@@ -109,6 +116,7 @@ const Auth = observer (() => {
                             <Form.Control
                                 placeholder="Повторите пароль..."
                                 value={repeat_password}
+                                maxLength="16"
                                 type='password'
                                 onChange={e => setRepeat_password(e.target.value)}
                             />
@@ -117,6 +125,7 @@ const Auth = observer (() => {
                             <Form.Control
                                 placeholder="Введите номер телефона..."
                                 value={phone}
+                                maxLength="11"
                                 onChange={e => setPhone(e.target.value)}
                             />
                         </>
