@@ -2,30 +2,31 @@ const uuid = require('uuid');
 const path = require('path');
 const {House, HouseInfo, Address} = require('../models/models');
 const ApiError = require('../error/ApiError');
+const { Op } = require('sequelize');
 
 class HouseController{
     //создание
     async create (req, res, next){
         try{
-            let { price, typeId, userId, info, city, street, number, entrance, flat} = req.body;
+            let { price, typeId, userId, square, info, city, street, number, entrance, flat} = req.body;
             const {img} = req.files;
             let fileName = uuid.v4() + ".jpg";
             img.mv(path.resolve(__dirname, '..' , 'static', fileName));
             var house;
             if(entrance && flat){
-                house = await House.create({price, typeId, userId, img: fileName});
+                house = await House.create({price, typeId, userId, square, img: fileName});
                 let houseId = house.id;
                 const address = await Address.create({city, street, number, entrance, flat, houseId});
             }
             //у помещения может не быть подъезда и квартиры (частный дом)
             else if(!entrance && !flat){
-                house = await House.create({price, typeId, userId, img: fileName});
+                house = await House.create({price, typeId, userId, square, img: fileName});
                 let houseId = house.id;
                 const address = await Address.create({city, street, number, houseId});
             }
             //может не быть подъезда, зато есть квартира (частный дом разделённый на 2 части)
             else if (!entrance && flat){
-                house = await House.create({price, typeId, userId, img: fileName});
+                house = await House.create({price, typeId, userId, square, img: fileName});
                 let houseId = house.id;
                 const address = await Address.create({city, street, number, flat, houseId});
             }
@@ -58,16 +59,45 @@ class HouseController{
     //получение
     async getAll (req, res){
         let {typeId, limit, page, city, lowPrice, upPrice} = req.query;
+        if (city == ""){
+            city = null
+        }
+        if (lowPrice == ""){
+            lowPrice = null
+        }
+        if (upPrice == ""){
+            upPrice = null
+        }
         page = page || 1;
-        limit = limit || 20;
+        limit = limit || 9;
         let offset = page * limit - limit;
         let house;
-        if(!typeId){
+        if(!typeId && lowPrice == null && upPrice == null){
             house = await House.findAndCountAll({limit, offset, include: [{model: Address, as: 'add'}]});
         }
-        else{
+        else if(typeId && lowPrice != null && upPrice != null){
+            house = await House.findAndCountAll({where:{typeId, price: {[Op.lt]: upPrice, [Op.gt]: lowPrice}}, limit, offset, include: [{model: Address, as: 'add'}]});
+        }
+        else if(!typeId && lowPrice == null && upPrice != null){
+            house = await House.findAndCountAll({where:{price: {[Op.lt]: upPrice}}, limit, offset, include: [{model: Address, as: 'add'}]});
+        }
+        else if(!typeId && lowPrice != null && upPrice == null){
+            house = await House.findAndCountAll({where:{price: {[Op.gt]: lowPrice}}, limit, offset, include: [{model: Address, as: 'add'}]});
+        }
+        else if(!typeId && lowPrice != null && upPrice != null){
+            house = await House.findAndCountAll({where:{price: {[Op.lt]: upPrice, [Op.gt]: lowPrice}}, limit, offset, include: [{model: Address, as: 'add'}]});
+        }
+        else if(typeId && lowPrice == null && upPrice == null){
             house = await House.findAndCountAll({where:{typeId}, limit, offset, include: [{model: Address, as: 'add'}]});
         }
+        else if(typeId && lowPrice == null && upPrice != null){
+            house = await House.findAndCountAll({where:{typeId, price: {[Op.lt]: upPrice}}, limit, offset, include: [{model: Address, as: 'add'}]});
+        }
+        else if(typeId && lowPrice != null && upPrice == null){
+            house = await House.findAndCountAll({where:{typeId, price: {[Op.gt]: lowPrice}}, limit, offset, include: [{model: Address, as: 'add'}]});
+        }
+
+
         if (city != null){
             let count = parseInt(house.count);
             house.rows = house.rows.filter(row => {
@@ -78,43 +108,6 @@ class HouseController{
                 return filteredAdd.length > 0;
             });
             house.count = count;
-        }
-        if (lowPrice != null && upPrice != null){
-            let removedCount = 0;
-            for (let i = house.rows.length - 1; i >= 0; i--) {
-                const price = house.rows[i].price;
-
-                if (price < lowPrice || price > upPrice) {
-                    house.rows.splice(i, 1);
-                    removedCount++;
-                }
-            }
-            house.count -= removedCount;
-        }
-        else if (lowPrice == null && upPrice != null){
-            let removedCount = 0;
-            for (let i = house.rows.length - 1; i >= 0; i--) {
-                const price = house.rows[i].price;
-
-                if (price > upPrice) {
-                    house.rows.splice(i, 1);
-                    removedCount++;
-                }
-            }
-
-            house.count -= removedCount;
-        }
-        else if (lowPrice != null && upPrice == null){
-            let removedCount = 0;
-            for (let i = house.rows.length - 1; i >= 0; i--) {
-                const price = house.rows[i].price;
-
-                if (price < lowPrice) {
-                    house.rows.splice(i, 1);
-                    removedCount++;
-                }
-            }
-            house.count -= removedCount;
         }
         return res.json(house);
     }

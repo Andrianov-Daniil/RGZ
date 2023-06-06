@@ -3,14 +3,16 @@ import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
 import {useParams} from 'react-router-dom'
 import { Context } from '..';
 import { fetchOneHouse } from '../http/houseAPI';
+import { fetchOneUser } from '../http/userAPI';
 
 
 const House = () => {
     const [house, setHouse] = useState({info: [], add:[]});
     console.log(house);
+    const [phone, setPhone] = useState();
     const {id} = useParams();
     useEffect(() => {
-        fetchOneHouse(id).then(data => setHouse(data));
+        fetchOneHouse(id).then(data => {setHouse(data);  fetchOneUser(data.userId).then(inf => setPhone(inf));});
     }, []);
 
     return(
@@ -22,21 +24,21 @@ const House = () => {
                 <Col md={4} className='my-auto address'>
                     {house.add.map((info, index) => 
                         <Row key={info.id} style={{background: 'transparent', padding: 10}}>
-                            Город: {info.city} <h/>
-                            Улица: {info.street} <h/>
-                            Номер дома: {info.number} <h/>
+                            Город: {info.city} <br/>
+                            Улица: {info.street} <br/>
+                            Номер дома: {info.number} <br/>
                             {info.entrance === null ?
                                 <></>
                                 :
                                 <>
-                                    Подъезд: {info.entrance} <h/>
+                                    Подъезд: {info.entrance} <br/>
                                 </>
                             }
                             {info.flat === null ?
                                 <></>
                                 :
                                 <>
-                                    Квартира: {info.flat} <h/>
+                                    Квартира: {info.flat} <br/>
                                 </>
                             }
                         </Row>
@@ -48,7 +50,7 @@ const House = () => {
                         style={{width: 300, height: 300, fontSize: 32, border: '5px solid lightgray'}}
                     >
                         <h3>{house.price} ₽/мес.</h3>
-                        <Button variant={"outline-dark"} onClick={e => alert("Номер владельца" )}>Связаться с владельцем</Button>
+                        <Button variant={"outline-dark"} onClick={e => alert(phone)}>Связаться с владельцем</Button>
                     </Card>
                 </Col>
             </Row>

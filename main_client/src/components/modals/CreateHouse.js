@@ -11,6 +11,7 @@ const CreateHouse = observer(({show, onHide}) => {
     const {user} = useContext(Context);
     const [city, setCity] = useState('');
     const [street, setStreet] = useState('');
+    const [square, setSquere] = useState('');
     const [number, setNumber] = useState('');
     const [entrance, setEntrance] = useState('');
     const [flat, setFlat] = useState('');
@@ -43,11 +44,11 @@ const CreateHouse = observer(({show, onHide}) => {
 
 
     const addHouse = () => {
-        if (Number(price) <= 100 ){
-            return alert('Укажите корректную стоимость за месяц');
-        }
         if(house.selectedType.name === undefined){
             return alert("Выберите тип");
+        }
+        if(square === ""){
+            return alert("Введите площадь помещения в квадратных метрах");
         }
         if(city === ""){
             return alert("Введите название города");
@@ -72,6 +73,7 @@ const CreateHouse = observer(({show, onHide}) => {
         }
 
         const formData = new FormData();
+        formData.append('square', square);
         formData.append('city', city);
         formData.append('street', street);
         formData.append('number', number);
@@ -112,6 +114,7 @@ const CreateHouse = observer(({show, onHide}) => {
                         </Dropdown.Menu>
                     </Dropdown>
                 </Form>
+                <Form.Control value={square} maxlength="5" className='mt-2' placeholder='Площадь в квадратныйх метрах...' onChange={e => setSquere(onlyNumbers(e.target.value))}/>
                 <Form.Control value={city} maxlength="30" className='mt-2' placeholder='Город...' onChange={e => setCity(e.target.value)}/>
                 <Form.Control value={street} maxlength="150" className='mt-2' placeholder='Название улицы...' onChange={e => setStreet(e.target.value)}/>
                 <Form.Control value={number} maxlength="5" className='mt-2' placeholder='Номер дома...' onChange={e => setNumber(e.target.value)}/>

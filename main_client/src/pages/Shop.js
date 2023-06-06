@@ -35,6 +35,11 @@ const Shop = observer( () => {
         })
     }, [house.page, house.selectedType, lowPrice, upPrice])
     
+    const onlyNumbers = (input) => {
+        const filteredInput = input.replace(/\D/g, '');
+        return filteredInput;
+    }
+
     return(
         <Container>
             <Row className="mt-4">
@@ -66,8 +71,8 @@ const Shop = observer( () => {
                                     <Form.Control
                                         placeholder="От"
                                         value={upPrice}
-                                        maxlength="16"
-                                        onChange={e => {house.setPage(1); setUpPrice(e.target.value)}}
+                                        maxLength="7"
+                                        onChange={e => {house.setPage(1); setUpPrice(onlyNumbers(e.target.value))}}
                                     />
                                 </Col>
                             </Row>
@@ -81,8 +86,8 @@ const Shop = observer( () => {
                                     <Form.Control
                                         placeholder="до"
                                         value={lowPrice}
-                                        maxlength="16"
-                                        onChange={e => setLowPrice(e.target.value)}
+                                        maxLength="7"
+                                        onChange={e => setLowPrice(onlyNumbers(e.target.value))}
                                     />
                                 </Col>
                             </Row>

@@ -39,6 +39,10 @@ const House = sequelize.define('house',{
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    square:{
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     img: {
         type: DataTypes.STRING,
         allowNull: true
